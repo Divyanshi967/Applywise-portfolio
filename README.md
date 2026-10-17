@@ -1,3 +1,4 @@
+# ApplyWise — Internship & OA Tracker (Version 2.0)
 
 A responsive, frontend-only internship and placement tracker built with HTML, CSS and vanilla JavaScript.
 
@@ -6,10 +7,11 @@ A responsive, frontend-only internship and placement tracker built with HTML, CS
 2. Open the extracted `ApplyWise` folder in VS Code. The project is separated into `index.html` (structure), `styles.css` (design and responsive layout), and `script.js` (application logic). Open `index.html` in a modern browser, or use Live Server in VS Code.
 3. The app stores records in the browser's `localStorage`; no installation or backend is required.
 
+
+
 ## 🚀 Live Demo
 
 [**Click here to use ApplyWise**](https://divyanshi967.github.io/Applywise-portfolio/)
-# ApplyWise — Internship & OA Tracker (Version 2.0)
 
 ## Project files
 - `index.html` — page structure and forms
