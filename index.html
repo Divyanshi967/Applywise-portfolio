@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ApplyWise helps students track internship applications, online assessments, interviews, and deadlines.">
+<title>ApplyWise — Internship Tracker</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">A</div><div class="brand-name">apply<span>wise</span></div></div>
+    <div>
+      <div class="nav-label">Workspace</div>
+      <nav class="nav">
+        <button class="active" id="navDashboard"><span class="nav-icon">▦</span>Dashboard</button>
+        <button id="navApplications"><span class="nav-icon">▤</span>My applications</button>
+        <button id="navDeadlines"><span class="nav-icon">◷</span>Upcoming deadlines</button>
+        <button id="navBoard"><span class="nav-icon">▥</span>Kanban board</button>
+        <button id="navCalendar"><span class="nav-icon">▦</span>Calendar</button>
+        <button id="navNotes"><span class="nav-icon">✎</span>Company notes</button>
+      </nav>
+    </div>
+    <div>
+      <div class="nav-label">Manage</div>
+      <nav class="nav">
+        <button id="navExport"><span class="nav-icon">⇩</span>Export data</button>
+        <button id="navReset"><span class="nav-icon">↻</span>Reset demo data</button>
+      </nav>
+    </div>
+    <div class="sidebar-bottom">
+      <strong>Small steps add up ✨</strong>
+      <p>Keep every opportunity organized, so you can focus on preparing for the next round.</p>
+      <button id="sideAdd">+ Add an application</button>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow" id="todayLabel"><span class="eyebrow-dot"></span> CAREER COMMAND CENTER <span class="eyebrow-divider">/</span> YOUR NEXT MOVE STARTS HERE</div>
+        <h1 id="pageHeading">Make your <span class="heading-accent">next move</span> count.</h1>
+        <div class="subtitle" id="pageSubtitle">Every application. Every deadline. One focused view of your career journey.</div>
+      </div>
+      <div class="top-actions">
+        <button class="btn" id="themeBtn" title="Toggle light/dark theme" aria-label="Toggle theme">◐ <span>Theme</span></button>
+        <button class="btn" id="exportBtn">⇩ <span>Export CSV</span></button>
+        <button class="btn btn-primary" id="addBtn">＋ <span>Add application</span></button>
+        <div class="avatar" title="Your workspace">YW</div>
+      </div>
+    </header>
+
+    <section class="stats" id="statsSection" aria-label="Application statistics">
+      <article class="stat"><div class="stat-top"><span class="stat-label">Total applications</span><span class="stat-icon i-purple">▤</span></div><div class="stat-value" id="totalStat">0</div><div class="stat-foot" id="totalFoot">Opportunities you're tracking</div></article>
+      <article class="stat"><div class="stat-top"><span class="stat-label">Assessments</span><span class="stat-icon i-blue">⌘</span></div><div class="stat-value" id="assessmentStat">0</div><div class="stat-foot">Coding tests and online rounds</div></article>
+      <article class="stat"><div class="stat-top"><span class="stat-label">Interviews</span><span class="stat-icon i-amber">◉</span></div><div class="stat-value" id="interviewStat">0</div><div class="stat-foot">Conversations to prepare for</div></article>
+      <article class="stat"><div class="stat-top"><span class="stat-label">Offers</span><span class="stat-icon i-green">✓</span></div><div class="stat-value" id="offerStat">0</div><div class="stat-foot" id="offerFoot">Keep moving forward</div></article>
+    </section>
+
+    <section class="content-grid" id="dashboardContent">
+      <div class="panel" id="applicationsPanel">
+        <div class="panel-head"><div><div class="panel-title">Your applications</div><div class="panel-subtitle" id="tableSubtitle">Every opportunity, in one place</div></div><button class="link-btn" id="clearFilters">Clear filters ↗</button></div>
+        <div class="toolbar">
+          <div class="search-wrap"><span>⌕</span><input class="field" id="searchInput" type="search" placeholder="Search company or role…" aria-label="Search applications"></div>
+          <select class="field" id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option>Saved</option><option>Applied</option><option>Assessment</option><option>Interview</option><option>Offer</option><option>Rejected</option></select>
+          <select class="field" id="sortSelect" aria-label="Sort applications"><option value="deadline">Deadline: soonest</option><option value="company">Company: A–Z</option><option value="updated">Recently added</option></select>
+        </div>
+        <div class="table-wrap">
+          <table id="applicationsTable"><thead><tr><th>Company / role</th><th>Status</th><th>Next step</th><th>Deadline</th><th>Actions</th></tr></thead><tbody id="applicationsBody"></tbody></table>
+          <div class="empty" id="emptyState" hidden><strong>No applications found</strong>Try changing your filters or add a new opportunity.</div>
+        </div>
+      </div>
+      <div class="side-stack">
+        <section class="panel" id="deadlinesPanel">
+          <div class="panel-head"><div><div class="panel-title">Coming up next</div><div class="panel-subtitle">Your nearest active deadlines</div></div><span style="font-size:18px;color:#8c84e9">◷</span></div>
+          <div class="deadline-list" id="deadlineList"></div>
+          <div class="empty" id="deadlineEmpty" hidden>No upcoming deadlines. Add a deadline to an application to see it here.</div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><div><div class="panel-title">Your progress</div><div class="panel-subtitle">A snapshot of your pipeline</div></div></div>
+          <div class="progress-area" id="progressArea"></div>
+          <div class="tips"><div class="tip-card"><strong>💡 A tiny tip</strong><p id="tipText">After each assessment, write down what went well and what you'll improve next time.</p></div></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel feature-section" id="boardPanel" hidden>
+      <div class="feature-head"><div><h2>Recruitment pipeline</h2><p>Drag an application into another stage to update its status.</p></div><span class="stat-icon i-purple">▥</span></div>
+      <div class="board-wrap" id="kanbanBoard"></div>
+    </section>
+    <section class="panel feature-section" id="calendarPanel" hidden>
+      <div class="feature-head"><div><h2>Application calendar</h2><p>Deadlines are taken from your saved applications. Select an event to edit it.</p></div><div class="calendar-controls"><button class="icon-btn" id="prevMonth" aria-label="Previous month">‹</button><strong id="calendarMonth"></strong><button class="icon-btn" id="nextMonth" aria-label="Next month">›</button></div></div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+    </section>
+    <section class="panel feature-section" id="notesPanel" hidden>
+      <div class="feature-head"><div><h2>Company notes</h2><p>Keep recruiter details, OA learnings and interview preparation beside each opportunity.</p></div><button class="btn btn-primary" id="addNoteBtn">＋ Add notes</button></div>
+      <div class="notes-list" id="companyNotesList"></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-head"><h2 id="modalTitle">Add an application</h2><button class="close-btn" id="closeModal" aria-label="Close dialog">×</button></div>
+    <form id="applicationForm">
+      <input type="hidden" id="applicationId">
+      <div class="form-grid">
+        <div class="form-group"><label for="companyInput">Company name *</label><input class="field" id="companyInput" required maxlength="70" placeholder="e.g. Accenture"></div>
+        <div class="form-group"><label for="roleInput">Role title *</label><input class="field" id="roleInput" required maxlength="90" placeholder="e.g. Technology Intern"></div>
+        <div class="form-group"><label for="statusInput">Current status *</label><select class="field" id="statusInput"><option>Saved</option><option>Applied</option><option>Assessment</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></div>
+        <div class="form-group"><label for="deadlineInput">Application / round deadline</label><input class="field" id="deadlineInput" type="date"></div>
+        <div class="form-group"><label for="linkInput">Application link</label><input class="field" id="linkInput" type="url" placeholder="https://…"></div>
+        <div class="form-group"><label for="nextStepInput">Next step</label><input class="field" id="nextStepInput" maxlength="100" placeholder="e.g. Revise SQL joins"></div>
+        <div class="form-group full"><label for="notesInput">Notes</label><textarea class="field" id="notesInput" maxlength="1000" placeholder="Recruiter details, topics to revise, or follow-up notes…"></textarea></div>
+      </div>
+      <div class="form-actions"><button type="button" class="btn" id="cancelModal">Cancel</button><button type="submit" class="btn btn-primary">Save application</button></div>
+    </form>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+</body>
+</html>
